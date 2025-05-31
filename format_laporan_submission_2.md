@@ -12,44 +12,89 @@ Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
-Menjelaskan pernyataan masalah:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Bagaimana distribusi user dengan interaksi terbanyak?
+- Bagaimana distribusi produk berdasarkan rating tertinggi dan terendah?
+- Bagaimana membangun sistem rekomendasi produk fashion berdasarkan kemiripan atribut seperti kategori, warna, merek, dan ukuran?
+
 
 ### Goals
 
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
+- Menampilkan visualisasi distribusi interaksi pengguna untuk mengidentifikasi user dengan aktivitas terbanyak.
+- Menampilkan distribusi rating produk untuk memahami kualitas dan persepsi produk secara umum.
+- Mengembangkan sistem rekomendasi produk berbasis atribut produk untuk meningkatkan pengalaman pengguna dalam memilih produk fashion.
 
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
+**Solution Approach**:
 
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+- Visualisasi Distribusi Interaksi Pengguna
+
+  Menganalisis dan menampilkan distribusi interaksi user menggunakan grafik seperti histogram atau bar chart untuk mengidentifikasi pengguna dengan aktivitas terbanyak.
+  
+- Visualisasi Distribusi Rating Produk
+
+  Menggambarkan persebaran rating produk dengan histogram atau boxplot untuk mengenali produk dengan rating tertinggi dan terendah.
+
+- Sistem Rekomendasi Berbasis Content-Based Filtering (CBF)
+
+  Membangun sistem rekomendasi yang menghitung kemiripan produk berdasarkan atribut (kategori, warna, merek, ukuran) menggunakan metrik seperti cosine similarity.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan dalam proyek ini diambil dari situs [Kaggle - Fashion Product](https://www.kaggle.com/datasets/bhanupratapbiswas/fashion-products). Dataset ini berisi informasi produk fashion yang dijual secara online, serta mencakup fitur-fitur yang relevan untuk membuat sistem rekomendasi produk.
 
-Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Variabel-variabel pada Fashion Product dataset adalah sebagai berikut:
+| Nama Variabel | Deskripsi                                                                                                       | Tipe Data            |
+| ------------- | --------------------------------------------------------------------------------------------------------------- | -------------------- |
+| User ID       | Nomor unik yang mengidentifikasi pengguna.                                                                      | int64 (Numerik)      |
+| Product ID    | Nomor unik yang mengidentifikasi setiap produk fashion.                                                         | int64 (Numerik)      |
+| Product Name  | Nama dari produk fashion.                                                                                       | object (Kategorikal) |
+| Brand         | Merek produk fashion.                                                                                           | object (Kategorikal) |
+| Category      | Kategori produk.                                                                                                | object (Kategorikal) |
+| Price         | Harga produk.                                                                                                   | int64 (Numerik)      |
+| Rating        | Nilai rating produk yang diberikan oleh pengguna, dengan skala 1 sampai 5.                                      | float64 (Numerik)    |
+| Color         | Warna utama produk.                                                                                             | object (Kategorikal) |
+| Size          | Ukuran produk.                                                                                                  | object (Kategorikal) |
 
-Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+Informasi awal dataset:
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data beserta insight atau exploratory data analysis.
+- Terdiri dari 9 kolom dengan 1000 baris.
+- Tidak memiliki missing value.
+- Tidak memiliki duplikasi data.
+- Tidak memiliki outlier.
+- User ID hanya sampai 100.
+
+Exploratory Data Analysis (EDA)
+
+1. Distribusi Antar Fitur Numerik
+
+   ![image](https://github.com/user-attachments/assets/4738db6d-5cab-4610-8878-f3a115cd58d7)
+   Insight:
+
+3. Distribusi Antar Fitur Kategorikal
+
+   ![image](https://github.com/user-attachments/assets/33d7240b-6f9b-46e0-84ef-f1f498c2f583)
+   Insight:
+
+4. Distribusi User ID dengan Interaksi Terbanyak
+
+   ![image](https://github.com/user-attachments/assets/102d1b35-1d7a-4616-8ed2-a343c6a4a2b4)
+   Insight:
+
+5. Distribusi Produk dengan Rating Tertinggi
+
+   ![image](https://github.com/user-attachments/assets/bcf1522e-1fb2-405f-b0dc-2131239e4a2e)
+   Insight:
+
+6. Distribusi Produk dengan Rating Terendah
+
+   ![image](https://github.com/user-attachments/assets/ecdf137a-17c1-42ad-9d9a-656691b4100b)
+   Insight:
+   
+8. Visualisasi Korelasi Antar Fitur Numerik
+   
+   ![image](https://github.com/user-attachments/assets/5a03c5a6-172b-4e3e-b264-07a81383d441)
+   Insight:
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
