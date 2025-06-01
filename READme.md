@@ -168,7 +168,7 @@ Pada tahap ini, dilakukan serangkaian proses untuk menyiapkan data agar siap dig
 
 
 ## Modeling
-Tahapan ini membahas sistem rekomendasi yang dibangun menggunakan pendekatan Content-Based Filtering dengan teknik Cosine Similarity dan Euclidean Distance. Tujuannya adalah untuk merekomendasikan produk fashion yang mirip berdasarkan atribut kontennya, seperti nama produk, kategori, merek, warna, dan ukuran.
+Tahapan ini membahas sistem rekomendasi yang dibangun menggunakan pendekatan Content-Based Filtering dengan teknik Cosine Similarity dan Euclidean Distance. Tujuannya adalah untuk merekomendasikan produk fashion yang mirip berdasarkan atribut, seperti nama produk, kategori, merek, warna, dan ukuran.
 
 - Consine Similarity
 
@@ -206,8 +206,25 @@ Metrik Evaluasi yang Digunakan:
 
 - Precision@5: Mengukur rasio produk yang direkomendasikan dan relevan terhadap jumlah total rekomendasi yang diberikan (Top-5). Metrik ini menilai ketepatan rekomendasi sistem.
 
+  ![image](https://github.com/user-attachments/assets/7ec57b57-8f8b-4a79-8e40-e300034b728d)
+
+  Keterangan:
+  - Mengukur seberapa banyak dari K item yang direkomendasikan merupakan item yang benar-benar relevan.
+  - Relevansi didefinisikan berdasarkan atribut seperti nama produk dan kategori yang sama dengan produk awal.
+
+
 - NDCG@5 (Normalized Discounted Cumulative Gain)
-Mengukur kualitas rekomendasi berdasarkan urutan (ranking) dan relevansi. Relevansi dihitung berdasarkan kesamaan atribut warna dan ukuran dengan produk awal. NDCG menilai seberapa baik sistem menempatkan produk yang paling relevan di posisi teratas daftar rekomendasi.
+Mengukur kualitas rekomendasi berdasarkan urutan (ranking) dan relevansi. NDCG menilai seberapa baik sistem menempatkan produk yang paling relevan di posisi teratas daftar rekomendasi.
+
+  ![image](https://github.com/user-attachments/assets/97bf8b5d-e6b2-4024-9b44-0fd0d5dd753d)
+
+  ![image](https://github.com/user-attachments/assets/2b7a6b85-cbe3-44b0-9cf5-bd1c3f9742aa)
+
+  Keterangan:
+  - 𝑟𝑒𝑙𝑖 adalah skor relevansi pada posisi ke-i dalam daftar rekomendasi (misalnya berdasarkan kesamaan warna dan ukuran).
+  - DCG mengukur seberapa relevan item berdasarkan urutan peringkatnya.
+  - IDCG adalah DCG terbaik yang mungkin didapat (urutan item paling relevan di atas).
+  - NDCG bernilai 1 jika urutan item sangat ideal, dan semakin kecil jika urutan semakin buruk.
 
 Hasil Evaluasi:
 
@@ -216,7 +233,7 @@ Hasil Evaluasi:
 | **Cosine Similarity**  | 1.000            | 0.971       |
 | **Euclidean Distance** | 1.000            | 0.971       |
 
-Bedasarkan hasil evaluasi Product ID 65, kedua pendekatan menghasilkan nilai Precision@5 dan NDCG@5 yang sama tinggi untuk data ini, menunjukkan bahwa sistem berhasil merekomendasikan produk relevan di posisi atas. Namun, Cosine Similarity lebih stabil dalam menilai kemiripan antar produk berdimensi banyak.
+Bedasarkan hasil evaluasi Product ID 65, kedua pendekatan menghasilkan nilai Precision@5 dan NDCG@5 yang sama tinggi untuk data ini, menunjukkan bahwa sistem berhasil merekomendasikan produk relevan. Namun, Cosine Similarity lebih stabil dalam menilai kemiripan antar produk.
 
 Kesimpulan:
 
