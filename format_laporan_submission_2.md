@@ -19,7 +19,7 @@ Referensi:
 
 - Bagaimana distribusi user dengan interaksi terbanyak?
 - Bagaimana distribusi produk berdasarkan rating tertinggi dan terendah?
-- Bagaimana membangun sistem rekomendasi produk fashion berdasarkan kemiripan atribut seperti kategori, warna, merek, dan ukuran?
+- Bagaimana membangun sistem rekomendasi produk fashion berdasarkan Product ID yang mewakiliki atribut seperti kategori, warna, merek, dan ukuran?
 
 
 ### Goals
@@ -41,7 +41,7 @@ Referensi:
 
 - Sistem Rekomendasi Berbasis Content-Based Filtering (CBF)
 
-  Membangun sistem rekomendasi yang menghitung kemiripan produk berdasarkan atribut (kategori, warna, merek, ukuran) menggunakan teknik seperti cosine similarity dan jaccard distance.
+  Membangun sistem rekomendasi yang menghitung kemiripan produk berdasarkan atribut (kategori, warna, merek, ukuran) menggunakan teknik seperti Cosine Similarity dan Euclidean Distance.
 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini diambil dari situs [Kaggle - Fashion Product](https://www.kaggle.com/datasets/bhanupratapbiswas/fashion-products). Dataset ini berisi informasi produk fashion yang dijual secara online, serta mencakup fitur-fitur yang relevan untuk membuat sistem rekomendasi produk.
@@ -90,26 +90,26 @@ Exploratory Data Analysis (EDA)
    - `Color`: White dan yellow menjadi jumlah terbanyak, menunjukkan bahwa preferensi pengguna pada warna cerah.
    - `Size`: Distribusi yang merata pada setiap ukuran produk.
 
-5. Distribusi User ID dengan Interaksi Terbanyak
+4. Distribusi User ID dengan Interaksi Terbanyak
 
    ![image](https://github.com/user-attachments/assets/102d1b35-1d7a-4616-8ed2-a343c6a4a2b4)
    
    Insight: User ID 37 memiliki jumlah interaksi tertinggi yang menunjukkan user tersebut paling aktif dibandingkan dengan user lainnya. Diikuti dengan user 65 dan 34, yang memiliki interaksi yang cukup tinggi. Hal ini dapat mengidentifikasi pengguna loyal atau aktif yang dapat dijadikan target untuk analisis preferensi, maupun promosi eksklusif. 
 
-7. Distribusi Produk dengan Rating Tertinggi
+5. Distribusi Produk dengan Rating Tertinggi
 
    ![image](https://github.com/user-attachments/assets/bcf1522e-1fb2-405f-b0dc-2131239e4a2e)
    
    Insight: Produk dengan ID 199, 418, dan 502 mendapat rating hampir sempurna yaitu 4.99, menunjukkan kepuasan pengguna yang sangat tinggi.
 
-9. Distribusi Produk dengan Rating Terendah
+6. Distribusi Produk dengan Rating Terendah
 
    ![image](https://github.com/user-attachments/assets/ecdf137a-17c1-42ad-9d9a-656691b4100b)
    
    Insight: Produk dengan ID 36 dan 136 mendapat rating sangat rendah, mengindikasikan ketidakpuasan pengguna yang tinggi pada produk tersebut.
    
-11. Visualisasi Korelasi Antar Fitur Numerik
-   
+7. Visualisasi Korelasi Antar Fitur Numerik
+
    ![image](https://github.com/user-attachments/assets/5a03c5a6-172b-4e3e-b264-07a81383d441)
    
    Insight: Semua nilai korelasi berada di kisaran -0.02 hingga 0.04, menunjukkan tidak ada fitur numerik yang memiliki korelasi yang kuat.
@@ -187,10 +187,16 @@ Tahapan ini membahas sistem rekomendasi yang dibangun menggunakan pendekatan Con
 
   ![image](https://github.com/user-attachments/assets/9968a808-6d21-4824-a719-ff218566e8b9)
 
-  | **Teknik**             | **Kelebihan**                                                                                                                                                                   | **Kekurangan**                                                                                                                                  |
+ | **Teknik**             | **Kelebihan**                                                                                                                                                                   | **Kekurangan**                                                                                                                                  |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Cosine Similarity**  | - Cocok untuk data berdimensi tinggi dan sparse. <br> - Tidak sensitif terhadap skala data. <br> - Efektif untuk data kategorikal atau teks yang telah diubah ke bentuk vektor. | - Tidak mempertimbangkan besar nilai absolut. <br> - Kurang cocok untuk data numerik kontinu.                                                   |
-| **Euclidean Distance** | - Intuitif dan mudah dipahami. <br> - Cocok untuk data numerik kontinu seperti harga atau berat.                                                                                | - Sensitif terhadap skala data (perlu normalisasi). <br> - Kurang efektif untuk data sparse. <br> - Kurang akurat untuk data berdimensi tinggi. |
+| **Cosine Similarity**  | - Cocok untuk data berdimensi tinggi dan *sparse*.<br> - Tidak sensitif terhadap skala data.<br> - Efektif untuk data kategorikal atau teks yang telah diubah ke bentuk vektor. | - Tidak mempertimbangkan besar nilai absolut.<br> - Kurang cocok untuk data numerik kontinu.                                                    |
+| **Euclidean Distance** | - Intuitif dan mudah dipahami.<br> - Cocok untuk data numerik kontinu seperti harga atau berat.                                                                                 | - Sensitif terhadap skala data (perlu normalisasi).<br> - Kurang efektif untuk data *sparse*.<br> - Kurang akurat untuk data berdimensi tinggi. |
+
+Hasil Rekomendasi Top-5 dengan Product ID 65
+
+![image](https://github.com/user-attachments/assets/68c8e9b1-a99c-417c-b4bb-5689bf8567fb)
+
+![image](https://github.com/user-attachments/assets/186cf323-db2a-4d5a-8361-d4c642ff171e)
 
 
 ## Evaluation
@@ -215,5 +221,3 @@ Bedasarkan hasil evaluasi Product ID 65, kedua pendekatan menghasilkan nilai Pre
 Kesimpulan:
 
 Berdasarkan evaluasi terhadap sistem rekomendasi dengan pendekatan Content-Based Filtering menggunakan dua teknik pengukuran kesamaan yaitu Cosine Similarity dan Euclidean Distance, diperoleh hasil evaluasi yang identik, yaitu Precision@5 sebesar 1.000 dan NDCG@5 sebesar 0.971 untuk produk yang diuji (Product ID 65). Hal ini menunjukkan bahwa kedua teknik tersebut dapat memberikan rekomendasi yang relevan sesuai dengan preferensi pengguna. Namun, Cosine Similarity cenderung lebih unggul karena lebih stabil dalam menilai kemiripan antar produk dibandingkan Euclidean Distance.  
-
-**---Ini adalah bagian akhir laporan---**
